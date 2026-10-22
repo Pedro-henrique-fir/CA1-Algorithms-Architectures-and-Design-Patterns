@@ -4,18 +4,27 @@
  */
 package foodstorage;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 
 /**
  *
  * @author mac
  */
 public class FoodStorage {
+    
+    private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Scanner myKB = new Scanner(System.in);
+        CircularFoodQueue storage = new CircularFoodQueue(8);
         
         
         System.out.println(" =-=-=-= Food Storage =-=-=-= ");
@@ -36,7 +45,8 @@ public class FoodStorage {
             
             switch (option) {
                 case "1":
-                    System.out.println("1");
+                    
+                    addItem(myKB, storage);
                     break;
                                         
                 case "2":
@@ -65,5 +75,101 @@ public class FoodStorage {
             }
         }
     }
+    
+    private static void addItem(Scanner myKB, CircularFoodQueue storage) {
+        if (storage.isFull()) {
+            System.out.println("Storage is full");
+            return;
+        }
+
+        FoodType type = checkFoodType(myKB);
+        int weight = checkWeight(myKB);
+        LocalDate bestBefore = checkBestBefore(myKB);
+
+        FoodItem item = new FoodItem(type, weight, bestBefore);
+        storage.enqueue(item);
+
+        System.out.println("Added: " + item);
+
+    }
+    
+    private static FoodType checkFoodType(Scanner myKB) {
+        while (true) {
+            
+            System.out.println(
+                    "Food Menu:"
+                    + "\n   Burger"
+                    + "\n   Pizza"
+                    + "\n   Fries"
+                    + "\n   Sandwich"
+                    + "\n   Hotdog"
+                + "\n=-=-=-=-=-=-=-=-="
+        );
+            
+            System.out.print("Food name: ");
+            
+            String input = myKB.nextLine().trim().toUpperCase();
+            try {
+                return FoodType.valueOf(input);
+                
+            } catch (IllegalArgumentException e) {
+                System.out.println("\n Invalid food name  \n");
+                
+            }
+        }
+    }
+    
+    private static int checkWeight(Scanner myKB) {
+        while (true) {
+            System.out.print("Weight in grams: ");
+            try {
+                    
+                int weight = Integer.parseInt(myKB.nextLine().trim());
+                
+                if (weight > 0) {
+                    return weight;
+                    
+                } else {
+                    System.out.println("\n Invalid weight \n");
+                    
+                }
+                
+            } catch (NumberFormatException e) {
+                System.out.println("\n Invalid number \n");
+                
+            }
+                                  
+        }
+    }
+    
+    private static LocalDate checkBestBefore(Scanner sc) {
+        LocalDate today = LocalDate.now();
+        LocalDate maxDate = today.plusDays(14);
+
+        while (true) {
+            System.out.print("Best before date (dd/MM/yyyy): ");
+            
+            try {
+                LocalDate bestBefore = LocalDate.parse(sc.nextLine().trim(), dateFormat);
+                
+                if (bestBefore.isBefore(today)) {
+                    System.out.println("This food has expired");
+                    
+                } else if (bestBefore.isAfter(maxDate)){
+                    
+                    System.out.println("\n Best before date can be at most 14 days from today (" + maxDate.format(dateFormat) + "). \n");
+  
+                } else {
+                    return bestBefore;
+                    
+                }
+                
+            } catch (DateTimeParseException e) {
+                System.out.println("\n Use the format dd/MM/yyyy. \n");
+            }
+            
+        }
+    }
+    
     
 }

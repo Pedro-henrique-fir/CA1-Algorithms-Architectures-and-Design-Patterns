@@ -5,12 +5,18 @@
 package foodstorage;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 /**
  *
  * @author mac
  */
 public class FoodItem {
+    
+    private static DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static DateTimeFormatter dataTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
     
     private  FoodType type;
     private  int weightGrams;
@@ -37,8 +43,14 @@ public class FoodItem {
         return bestBefore;
     }
 
-    public LocalDateTime getTimePlaced() {
+    public LocalDateTime getStoredAt() {
         return storedAt;
+    }
+    
+    @Override
+    public String toString() {
+        return type + " | " + weightGrams + "g | best before " + bestBefore.format(dataFormat) + " | placed at " + storedAt.format(dataTimeFormat);
+        
     }
 
     
