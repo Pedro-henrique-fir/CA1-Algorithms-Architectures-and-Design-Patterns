@@ -39,6 +39,9 @@ public class FoodStorage {
             System.out.println("5 - Search item");
             System.out.println("6 - Exit");
             
+            
+            //System.out.println(storage.size());
+            
             System.out.print("Choose an option (1-6): ");
 
             String option = myKB.nextLine().trim();
@@ -50,7 +53,7 @@ public class FoodStorage {
                     break;
                                         
                 case "2":
-                    System.out.println("2");
+                    removeFood(storage);
                     break;
                     
                 case "3":
@@ -169,6 +172,18 @@ public class FoodStorage {
             }
             
         }
+    }
+    
+    private static void removeFood(CircularFoodQueue storage) {
+        
+        if(storage.isEmpty()) {
+            System.out.println("Storage is empty");
+            return;
+        }
+
+        FoodItem item = storage.dequeue();
+        System.out.println("Removed: " + item);
+        
     }
     
     

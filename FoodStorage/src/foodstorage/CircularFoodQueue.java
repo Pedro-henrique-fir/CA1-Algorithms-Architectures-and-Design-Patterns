@@ -62,4 +62,17 @@ public class CircularFoodQueue {
         }
     }
     
+    public FoodItem dequeue() {
+        if (isEmpty()){
+            return null;
+        }
+        
+        FoodItem item = items[front];
+        items[front] = null;
+        front = (front + 1) % limit;
+        count = count - 1;
+        return item;
+        
+    }
+    
 }

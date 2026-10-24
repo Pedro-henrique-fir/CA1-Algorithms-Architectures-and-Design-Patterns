@@ -14,8 +14,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class FoodItem {
     
-    private static DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private static DateTimeFormatter dataTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     
     private  FoodType type;
@@ -49,7 +49,7 @@ public class FoodItem {
     
     @Override
     public String toString() {
-        return type + " | " + weightGrams + "g | best before " + bestBefore.format(dataFormat) + " | placed at " + storedAt.format(dataTimeFormat);
+        return type + " | " + weightGrams + "g | best before " + bestBefore.format(dateFormat) + " | placed at " + storedAt.format(dateTimeFormat);
         
     }
 
