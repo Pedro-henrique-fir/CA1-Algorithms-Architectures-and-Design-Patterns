@@ -75,4 +75,13 @@ public class CircularFoodQueue {
         
     }
     
+    public FoodItem peek() {
+
+    if (isEmpty()) {
+        return null;
+    }
+
+    return items[front];
+}
+    
 }

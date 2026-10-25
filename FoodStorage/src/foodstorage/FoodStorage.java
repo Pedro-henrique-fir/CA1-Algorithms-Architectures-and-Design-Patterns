@@ -57,7 +57,7 @@ public class FoodStorage {
                     break;
                     
                 case "3":
-                    System.out.println("3");
+                    showFirstItem(storage);
                     break;
                     
                 case "4":
@@ -186,5 +186,16 @@ public class FoodStorage {
         
     }
     
-    
+    private static void showFirstItem(CircularFoodQueue storage) {
+
+    if (storage.isEmpty()) {
+        System.out.println("Storage is empty");
+        return;
+    }
+
+    FoodItem item = storage.peek();
+
+    System.out.println("First item: " + item);
+}
+     
 }
