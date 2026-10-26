@@ -83,5 +83,21 @@ public class CircularFoodQueue {
 
     return items[front];
 }
-    
+   public void displayAll() {
+
+    if (isEmpty()) {
+        System.out.println("Storage is empty");
+        return;
+    }
+
+    System.out.println("\n===== Stored Food Items =====");
+
+    for (int i = 0; i < count; i++) {
+
+        int index = (front + i) % limit;
+
+        System.out.println((i + 1) + " - " + items[index]);
+
+    }
+} 
 }

@@ -61,7 +61,7 @@ public class FoodStorage {
                     break;
                     
                 case "4":
-                    System.out.println("4");
+                    showAllItems(storage);
                     break;
                     
                 case "5":
@@ -197,5 +197,7 @@ public class FoodStorage {
 
     System.out.println("First item: " + item);
 }
-     
+   private static void showAllItems(CircularFoodQueue storage) {
+    storage.displayAll();
+}  
 }
