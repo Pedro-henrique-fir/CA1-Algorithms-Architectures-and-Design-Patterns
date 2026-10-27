@@ -99,5 +99,23 @@ public class CircularFoodQueue {
         System.out.println((i + 1) + " - " + items[index]);
 
     }
-} 
+}
+   public FoodItem search(FoodType type) {
+
+    if (isEmpty()) {
+        return null;
+    }
+
+    for (int i = 0; i < count; i++) {
+
+        int index = (front + i) % limit;
+
+        if (items[index].getType() == type) {
+            return items[index];
+        }
+
+    }
+
+    return null;
+}
 }

@@ -65,7 +65,7 @@ public class FoodStorage {
                     break;
                     
                 case "5":
-                    System.out.println("5");
+                    searchFood(myKB, storage);
                     break;
                     
                 case "6":
@@ -200,4 +200,23 @@ public class FoodStorage {
    private static void showAllItems(CircularFoodQueue storage) {
     storage.displayAll();
 }  
+   
+   private static void searchFood(Scanner myKB, CircularFoodQueue storage) {
+
+    if (storage.isEmpty()) {
+        System.out.println("Storage is empty");
+        return;
+    }
+    System.out.println("\n===== Search Food Item =====");
+
+    FoodType type = checkFoodType(myKB);
+
+    FoodItem item = storage.search(type);
+
+    if (item == null) {
+        System.out.println("Food item not found");
+    } else {
+        System.out.println("Food item found: " + item);
+    }
+}
 }
