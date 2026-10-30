@@ -22,6 +22,8 @@ public class FoodStorage {
     /**
      * @param args the command line arguments
      */
+    
+    
     public static void main(String[] args) {
         Scanner myKB = new Scanner(System.in);
         CircularFoodQueue storage = new CircularFoodQueue(8);
@@ -73,7 +75,7 @@ public class FoodStorage {
                     return;
                     
                 default:
-                    System.out.println("Invalid option. Please choose a oprion from 1 to 6.");
+                    System.out.println("Invalid option. Please choose a option from 1 to 6.");
                     
             }
         }
@@ -188,35 +190,46 @@ public class FoodStorage {
     
     private static void showFirstItem(CircularFoodQueue storage) {
 
-    if (storage.isEmpty()) {
-        System.out.println("Storage is empty");
-        return;
+        if (storage.isEmpty()) {
+            System.out.println("Storage is empty");
+            return;
+        }
+
+        FoodItem item = storage.peek();
+
+        System.out.println("First item: " + item);
     }
-
-    FoodItem item = storage.peek();
-
-    System.out.println("First item: " + item);
-}
-   private static void showAllItems(CircularFoodQueue storage) {
-    storage.displayAll();
-}  
+    
+    
+    private static void showAllItems(CircularFoodQueue storage) {
+        storage.displayAll();
+        
+    }  
    
-   private static void searchFood(Scanner myKB, CircularFoodQueue storage) {
+    
+    private static void searchFood(Scanner myKB, CircularFoodQueue storage) {
+        if (storage.isEmpty()) {
+            System.out.println("Storage is empty");
+            return;
+        }
 
-    if (storage.isEmpty()) {
-        System.out.println("Storage is empty");
-        return;
+        System.out.println("\n===== Search Food Item =====");
+
+        FoodType type = checkFoodType(myKB);
+
+        FoodItem[] items = storage.search(type);
+
+        if (items[0] == null) {
+            System.out.println("No " + type + " found in the storage.");
+            return;
+            
+        }
+
+        for (FoodItem item : items) {
+            if(item != null){
+                System.out.println("Food item found: " + item);
+            }
+            
+        }
     }
-    System.out.println("\n===== Search Food Item =====");
-
-    FoodType type = checkFoodType(myKB);
-
-    FoodItem item = storage.search(type);
-
-    if (item == null) {
-        System.out.println("Food item not found");
-    } else {
-        System.out.println("Food item found: " + item);
-    }
-}
 }

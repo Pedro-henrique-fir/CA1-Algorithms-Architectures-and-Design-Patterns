@@ -77,45 +77,52 @@ public class CircularFoodQueue {
     
     public FoodItem peek() {
 
-    if (isEmpty()) {
-        return null;
-    }
-
-    return items[front];
-}
-   public void displayAll() {
-
-    if (isEmpty()) {
-        System.out.println("Storage is empty");
-        return;
-    }
-
-    System.out.println("\n===== Stored Food Items =====");
-
-    for (int i = 0; i < count; i++) {
-
-        int index = (front + i) % limit;
-
-        System.out.println((i + 1) + " - " + items[index]);
-
-    }
-}
-   public FoodItem search(FoodType type) {
-
-    if (isEmpty()) {
-        return null;
-    }
-
-    for (int i = 0; i < count; i++) {
-
-        int index = (front + i) % limit;
-
-        if (items[index].getType() == type) {
-            return items[index];
+        if (isEmpty()) {
+            return null;
         }
 
+        return items[front];
     }
+    
+    
+    public void displayAll() {
+       
+        if (isEmpty()) {
+            System.out.println("Storage is empty");
+            return;
+        }
 
-    return null;
-}
+        System.out.println("\n===== Stored Food Items =====");
+
+        for (int i = 0; i < count; i++) {
+
+            int index = (front + i) % limit;
+
+            System.out.println((i + 1) + " - " + items[index]);
+
+        }
+    }
+   
+    
+    public FoodItem[] search(FoodType type) {
+        
+        FoodItem[] results = new FoodItem[count];
+        int found = 0;
+        
+        for (int i = 0; i < count; i++) {
+
+            int index = (front + i) % limit;
+
+            if (items[index].getType() == type) {
+                results[found] = items[index];
+                found = found + 1;
+                
+            }
+
+        }
+        
+        return results;
+    }
+   
+   
 }
