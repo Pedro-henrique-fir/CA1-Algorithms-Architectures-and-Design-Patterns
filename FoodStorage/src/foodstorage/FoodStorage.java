@@ -31,6 +31,7 @@ public class FoodStorage {
         
         System.out.println(" =-=-=-= Food Storage =-=-=-= ");
         
+        //Menu
         while (true){
             System.out.println("\n ======= Menu ======= ");
             
@@ -81,6 +82,7 @@ public class FoodStorage {
         }
     }
     
+    //asks for the details and adds it to the storage
     private static void addItem(Scanner myKB, CircularFoodQueue storage) {
         if (storage.isFull()) {
             System.out.println("Storage is full");
@@ -98,6 +100,7 @@ public class FoodStorage {
 
     }
     
+    //asks for the food name until it is one of the 5 types
     private static FoodType checkFoodType(Scanner myKB) {
         while (true) {
             
@@ -124,6 +127,7 @@ public class FoodStorage {
         }
     }
     
+    //asks for the weight until it is a number greater than 0
     private static int checkWeight(Scanner myKB) {
         while (true) {
             System.out.print("Weight in grams: ");
@@ -147,6 +151,7 @@ public class FoodStorage {
         }
     }
     
+    //asks for the best before date until it is valid, not expired and at most 14 days from today
     private static LocalDate checkBestBefore(Scanner sc) {
         LocalDate today = LocalDate.now();
         LocalDate maxDate = today.plusDays(14);
@@ -176,6 +181,7 @@ public class FoodStorage {
         }
     }
     
+    //removes the oldest food
     private static void removeFood(CircularFoodQueue storage) {
         
         if(storage.isEmpty()) {
@@ -188,6 +194,7 @@ public class FoodStorage {
         
     }
     
+    //show the oldest food
     private static void showFirstItem(CircularFoodQueue storage) {
 
         if (storage.isEmpty()) {
@@ -200,13 +207,14 @@ public class FoodStorage {
         System.out.println("First item: " + item);
     }
     
-    
+    //shows all the foods in the storage
     private static void showAllItems(CircularFoodQueue storage) {
         storage.displayAll();
         
     }  
    
     
+    //shows all the food type that the user chooses
     private static void searchFood(Scanner myKB, CircularFoodQueue storage) {
         if (storage.isEmpty()) {
             System.out.println("Storage is empty");

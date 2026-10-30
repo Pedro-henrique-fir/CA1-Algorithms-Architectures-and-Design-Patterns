@@ -8,6 +8,9 @@ package foodstorage;
  *
  * @author mac
  */
+
+// Circular queue that stores the food trays in a array
+// The oldest tray is always the first one to leave
 public class CircularFoodQueue {
     
     private FoodItem[] items;
@@ -26,6 +29,7 @@ public class CircularFoodQueue {
         
     }
     
+    //We use count to check if the queue is empty or full
     public boolean isEmpty(){
         
         return count == 0;
@@ -45,6 +49,7 @@ public class CircularFoodQueue {
         
     }
     
+    //Adds a tray at the rear O(1)
     public boolean enqueue(FoodItem item){
         
         if (isFull()){
@@ -62,12 +67,15 @@ public class CircularFoodQueue {
         }
     }
     
+    //Removes the tray at the front, the oldest one O(1)
     public FoodItem dequeue() {
         if (isEmpty()){
             return null;
         }
         
         FoodItem item = items[front];
+        
+        //clean the position so the old tray is not kept in memory
         items[front] = null;
         front = (front + 1) % limit;
         count = count - 1;
@@ -84,7 +92,7 @@ public class CircularFoodQueue {
         return items[front];
     }
     
-    
+    //Shows all the trays order from front to rear O(n)
     public void displayAll() {
        
         if (isEmpty()) {
@@ -103,7 +111,7 @@ public class CircularFoodQueue {
         }
     }
    
-    
+    //Linear search checks every tray and returns the ones with the same food type O(n)
     public FoodItem[] search(FoodType type) {
         
         FoodItem[] results = new FoodItem[count];

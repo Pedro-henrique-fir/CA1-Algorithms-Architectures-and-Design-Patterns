@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
  *
  * @author mac
  */
+
+//Represents one tray in the storage
 public class FoodItem {
     
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -8,6 +8,8 @@ package foodstorage;
  *
  * @author mac
  */
+
+//the five types of food that the storage accept
 public enum FoodType {
     BURGER,
     PIZZA,
